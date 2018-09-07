@@ -1,7 +1,8 @@
 {
   "name": "react-copy-button",
-  "version": "0.0.1",
-  "description": "Copy to clipboard react component.",
+  "version": "0.0.2",
+  "homepage": "https://cham11ng.github.io/react-copy-button",
+  "description": "Copy to clipboard react button component.",
   "author": "cham11ng",
   "license": "MIT",
   "repository": "cham11ng/react-copy-button",
