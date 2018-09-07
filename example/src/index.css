@@ -2,3 +2,13 @@
   margin-top: 25px;
   max-width: 70rem;
 }
+
+.button {
+  color: #606c76;
+  border-color: #606c76;
+}
+
+button.button-outline, .button.button-outline {
+  color: #606c76;
+  border-color: #606c76;
+}

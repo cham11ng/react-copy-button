@@ -35,10 +35,7 @@ export default class App extends Component {
                 onChange={this._handleChange}
               />
               <div style={{ textAlign: 'center' }} ref={this.imgRef}>
-                <img
-                  src={this.state.image || 'https://raw.githubusercontent.com/cham11ng/e2n/master/src/assets/logo.png'}
-                  alt="Image"
-                />
+                <img src={this.state.image || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2000px-React-icon.svg.png'} alt="Image" />
               </div>
               <CopyButton className="button button-outline" imgRef={this.imgRef}>
                 Copy Image
