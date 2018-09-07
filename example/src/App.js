@@ -58,7 +58,7 @@ export default class App extends Component {
                     this.state.image ||
                     'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2000px-React-icon.svg.png'
                   }
-                  alt="Image"
+                  alt="React Copy Button"
                 />
               </div>
               <CopyButton className="button button-outline" imgRef={this.imgRef} onClick={this._handleImageCopy}>
