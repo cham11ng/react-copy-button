@@ -1,7 +1,7 @@
-import ExampleComponent from './'
+import { CopyButton } from './';
 
-describe('ExampleComponent', () => {
+describe('CopyButton', () => {
   it('is truthy', () => {
-    expect(ExampleComponent).toBeTruthy()
-  })
-})
+    expect(CopyButton).toBeTruthy();
+  });
+});
