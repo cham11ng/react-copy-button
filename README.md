@@ -7,21 +7,37 @@
 ## Install
 
 ```bash
-npm install --save react-copy-button
+yarn install --save react-copy-button
 ```
 
 ## Usage
 
 ```tsx
-import * as React from 'react'
+import * as React from 'react';
 
-import MyComponent from 'react-copy-button'
+import CopyButton from 'react-copy-button';
 
 class Example extends React.Component {
-  render () {
+  constructor(props) {
+    super(props);
+
+    this.imgRef = React.createRef();
+    this.state = {
+      text: '',
+      image: ''
+    };
+  }
+
+  render() {
     return (
-      <MyComponent />
-    )
+      <React.Fragment>
+        <div ref={this.imgRef}>
+          <img src="https://i.imgur.com/nd1ACuf.png" />
+        </div>
+        <CopyButton imgRef={this.imgRef}>Copy Image</CopyButton>
+        <CopyButton text="Text to copy">Copy Text</CopyButton>
+      </React.Fragment>
+    );
   }
 }
 ```
