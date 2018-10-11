@@ -44,6 +44,10 @@ class Example extends React.Component {
 }
 ```
 
+## Browser compatibility
+
+For browser compatibility check [here](https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand#Browser_compatibility).
+
 ## License
 
 MIT © [cham11ng](https://github.com/cham11ng)
