@@ -14,9 +14,8 @@ export function copyTextToClipboard(text: string): any {
   }
 
   if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+    const selectionArea = document.getSelection();
     const element = document.createElement('textarea');
-
-    const selected = document.getSelection().rangeCount > 0 ? document.getSelection().getRangeAt(0) : false;
 
     element.textContent = text;
     element.style.left = '-9999px';
@@ -36,9 +35,15 @@ export function copyTextToClipboard(text: string): any {
     } finally {
       document.body.removeChild(element);
 
+      if (!selectionArea) {
+        return;
+      }
+
+      const selected = selectionArea.rangeCount > 0 ? selectionArea.getRangeAt(0) : false;
+
       if (selected) {
-        document.getSelection().removeAllRanges();
-        document.getSelection().addRange(selected);
+        selectionArea.removeAllRanges();
+        selectionArea.addRange(selected);
       }
     }
   }
@@ -55,6 +60,10 @@ export function copyImageToClipboard(element: HTMLDivElement): boolean {
   const selection = window.getSelection();
   const range = document.createRange();
 
+  if (!selection) {
+    return false;
+  }
+
   range.selectNodeContents(element);
   selection.removeAllRanges();
   selection.addRange(range);
@@ -66,6 +75,6 @@ export function copyImageToClipboard(element: HTMLDivElement): boolean {
 
     return false;
   } finally {
-    window.getSelection().removeAllRanges();
+    selection.removeAllRanges();
   }
 }
