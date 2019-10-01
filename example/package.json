@@ -1,7 +1,7 @@
 {
   "name": "react-copy-button-example",
   "homepage": "https://cham11ng.github.io/react-copy-button",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "license": "MIT",
   "private": true,
   "dependencies": {
