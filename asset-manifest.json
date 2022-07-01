@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/react-copy-button/static/css/main.78ad6254.css",
-    "main.js": "/react-copy-button/static/js/main.442e7a59.js",
+    "main.js": "/react-copy-button/static/js/main.5f77bad3.js",
     "index.html": "/react-copy-button/index.html",
     "main.78ad6254.css.map": "/react-copy-button/static/css/main.78ad6254.css.map",
-    "main.442e7a59.js.map": "/react-copy-button/static/js/main.442e7a59.js.map"
+    "main.5f77bad3.js.map": "/react-copy-button/static/js/main.5f77bad3.js.map"
   },
   "entrypoints": [
     "static/css/main.78ad6254.css",
-    "static/js/main.442e7a59.js"
+    "static/js/main.5f77bad3.js"
   ]
 }
