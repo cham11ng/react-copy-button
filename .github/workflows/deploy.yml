@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build_test:
+  deploy:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 16
           cache: 'yarn'
-          cache-dependency-path: 'yarn.lock'
+          cache-dependency-path: 'example/yarn.lock'
 
       - name: Install dependencies
         run: |
