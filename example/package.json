@@ -1,5 +1,6 @@
 {
   "name": "example",
+  "homepage": "https://cham11ng.github.io/react-copy-button",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
