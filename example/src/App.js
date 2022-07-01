@@ -1,8 +1,8 @@
-import React from "react";
-import { useRef } from "react";
-import { useState } from "react";
+import React from 'react';
+import { useRef } from 'react';
+import { useState } from 'react';
 
-import { CopyButton } from "react-copy-button";
+import { CopyButton } from 'react-copy-button';
 
 const TIMEOUT_DURATION = 1000;
 
@@ -10,7 +10,7 @@ function App() {
   const imgRef = useRef();
   const [isTextCopied, setTextCopied] = useState(false);
   const [isImageCopied, setImageCopied] = useState(false);
-  const [copyValue, updateValues] = useState({ copy: "", image: "" });
+  const [copyValue, updateValues] = useState({ copy: '', image: '' });
 
   const handleChange = (event) =>
     updateValues({ ...copyValue, [event.target.name]: event.target.value });
@@ -46,7 +46,7 @@ function App() {
               text={copyValue.text}
               onClick={handleTextCopy}
             >
-              {isTextCopied ? "Text Copied!" : "Copy Text"}
+              {isTextCopied ? 'Text Copied!' : 'Copy Text'}
             </CopyButton>
             <hr />
             <input
@@ -56,12 +56,12 @@ function App() {
               placeholder="Paste image url here"
               onChange={handleChange}
             />
-            <div style={{ textAlign: "center", padding: 40 }} ref={imgRef}>
+            <div style={{ textAlign: 'center', padding: 40 }} ref={imgRef}>
               <img
                 height={400}
                 src={
                   copyValue.image ||
-                  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2000px-React-icon.svg.png"
+                  'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2000px-React-icon.svg.png'
                 }
                 alt="React Copy Button"
               />
@@ -71,7 +71,7 @@ function App() {
               imgRef={imgRef}
               onClick={handleImageCopy}
             >
-              {isImageCopied ? "Image Copied!" : "Copy Image"}
+              {isImageCopied ? 'Image Copied!' : 'Copy Image'}
             </CopyButton>
           </div>
         </div>
