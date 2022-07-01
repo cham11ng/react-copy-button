@@ -1,44 +1,41 @@
 import * as React from 'react';
+import { copyImageToClipboard, copyTextToClipboard } from '../utils/clipboard';
 
-import { copyTextToClipboard, copyImageToClipboard } from '../utils/clipboard';
-
-interface CopyButtonProps {
-  text?: string;
-  className: string;
+type CopyProps = {
   children: React.ReactNode;
+  className?: string;
   onClick?: () => void;
-  imgRef?: React.RefObject<HTMLDivElement>;
-}
+  text?: string;
+  imageURL?: string;
+  imageRef?: React.RefObject<HTMLDivElement>;
+} & (
+  | { text: string }
+  | { imageURL: string }
+  | { imageRef: React.RefObject<HTMLDivElement> }
+);
 
-/**
- * @class CopyButton
- *
- * Copy to clipboard component.
- */
-class CopyButton extends React.Component<CopyButtonProps> {
-  componentDidMount() {
-    this.props.imgRef && this.props.imgRef.current;
-  }
+const CopyButton = (props: CopyProps) => {
+  const { text, imageURL, imageRef, className, children } = props;
 
-  _handleClick = () => {
-    this.props.text && copyTextToClipboard(this.props.text);
+  const handleClick = () => {
+    if (text !== undefined) {
+      copyTextToClipboard(text);
+    }
 
-    this.props.imgRef &&
-      this.props.imgRef.current &&
-      copyImageToClipboard(this.props.imgRef.current);
+    const content = imageURL || imageRef?.current;
 
-    this.props.onClick && this.props.onClick();
+    if (content) {
+      copyImageToClipboard(content);
+    }
+
+    props.onClick && props.onClick();
   };
 
-  render() {
-    const { className, children } = this.props;
-
-    return (
-      <button className={className} onClick={this._handleClick}>
-        {children}
-      </button>
-    );
-  }
-}
+  return (
+    <button type="button" className={className} onClick={handleClick}>
+      {children}
+    </button>
+  );
+};
 
 export default CopyButton;
