@@ -1,6 +1,6 @@
 {
   "name": "react-copy-button",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "homepage": "https://cham11ng.github.io/react-copy-button",
   "description": "Copy to clipboard react button component.",
   "author": "cham11ng",
@@ -17,7 +17,7 @@
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w",
-    "prepare": "husky install",
+    "prepare": "yarn build && husky install",
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build",
     "lint": "eslint .",
