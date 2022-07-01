@@ -1,6 +1,6 @@
 {
   "name": "react-copy-button",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "homepage": "https://cham11ng.github.io/react-copy-button",
   "description": "Copy to clipboard react button component.",
   "author": "cham11ng",
@@ -16,13 +16,20 @@
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w",
-    "prepare": "yarn run build",
+    "prepare": "yarn run build && husky install",
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "prettify": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}'"
   },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx}": "eslint --fix",
+    "*.{js,ts,jsx,tsx,css,md,json}": "prettier --write"
+  },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@rollup/plugin-commonjs": "^22.0.1",
     "@rollup/plugin-node-resolve": "^13.3.0",
@@ -36,14 +43,13 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",
     "gh-pages": "^4.0.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup": "^2.75.7",
     "tslib": "^2.4.0",
     "typescript": "^4.7.4"
-  },
-  "files": [
-    "dist"
-  ]
+  }
 }
