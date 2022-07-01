@@ -85,7 +85,8 @@ $ yarn start
 
 ## Browser compatibility
 
-For browser compatibility check [here](https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand#Browser_compatibility).
+- execCommand [here](https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand#Browser_compatibility).
+- Navigator.clipboard [here](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API#browser_compatibility).
 
 ## License
 
