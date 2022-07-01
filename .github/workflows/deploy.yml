@@ -7,9 +7,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./example
 
     steps:
       - name: Checkout
@@ -24,11 +21,13 @@ jobs:
 
       - name: Install dependencies
         run: |
+          cd example
           yarn install
           yarn build
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
+        working-directory: ./example
         with:
           deploy_key: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
