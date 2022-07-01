@@ -5,6 +5,7 @@ import { copyTextToClipboard, copyImageToClipboard } from '../utils/clipboard';
 interface CopyButtonProps {
   text?: string;
   className: string;
+  children: React.ReactNode;
   onClick?: () => void;
   imgRef?: React.RefObject<HTMLDivElement>;
 }
@@ -22,7 +23,9 @@ class CopyButton extends React.Component<CopyButtonProps> {
   _handleClick = () => {
     this.props.text && copyTextToClipboard(this.props.text);
 
-    this.props.imgRef && this.props.imgRef.current && copyImageToClipboard(this.props.imgRef.current);
+    this.props.imgRef &&
+      this.props.imgRef.current &&
+      copyImageToClipboard(this.props.imgRef.current);
 
     this.props.onClick && this.props.onClick();
   };

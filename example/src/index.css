@@ -1,14 +1,13 @@
-.container {
-  margin-top: 25px;
-  max-width: 70rem;
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.button {
-  color: #606c76;
-  border-color: #606c76;
-}
-
-button.button-outline, .button.button-outline {
-  color: #606c76;
-  border-color: #606c76;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }

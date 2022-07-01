@@ -35,15 +35,13 @@ export function copyTextToClipboard(text: string): any {
     } finally {
       document.body.removeChild(element);
 
-      if (!selectionArea) {
-        return;
-      }
+      if (selectionArea) {
+        const selected = selectionArea.rangeCount > 0 ? selectionArea.getRangeAt(0) : false;
 
-      const selected = selectionArea.rangeCount > 0 ? selectionArea.getRangeAt(0) : false;
-
-      if (selected) {
-        selectionArea.removeAllRanges();
-        selectionArea.addRange(selected);
+        if (selected) {
+          selectionArea.removeAllRanges();
+          selectionArea.addRange(selected);
+        }
       }
     }
   }

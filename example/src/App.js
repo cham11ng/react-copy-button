@@ -1,73 +1,83 @@
-import React, { Component } from 'react';
+import React from "react";
+import { useRef } from "react";
+import { useState } from "react";
 
-import { CopyButton } from 'react-copy-button';
+import { CopyButton } from "react-copy-button";
 
-const TIMEOUT_DURATION = 2000;
+const TIMEOUT_DURATION = 1000;
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
+function App() {
+  const imgRef = useRef();
+  const [isTextCopied, setTextCopied] = useState(false);
+  const [isImageCopied, setImageCopied] = useState(false);
+  const [copyValue, updateValues] = useState({ copy: "", image: "" });
 
-    this.imgRef = React.createRef();
-    this.state = {
-      text: '',
-      image: '',
-      isTextCopied: false,
-      isImageCopied: false
-    };
-  }
+  const handleChange = (event) =>
+    updateValues({ ...copyValue, [event.target.name]: event.target.value });
 
-  _handleChange = event => this.setState({ [event.target.name]: event.target.value });
-
-  _handleTextCopy = () => {
-    if (!this.state.isTextCopied) {
-      this.setState({ isTextCopied: true });
-      setTimeout(() => this.setState({ isTextCopied: false }), TIMEOUT_DURATION);
+  const handleTextCopy = () => {
+    if (!isTextCopied) {
+      setTextCopied(true);
+      setTimeout(() => setTextCopied(false), TIMEOUT_DURATION);
     }
   };
 
-  _handleImageCopy = () => {
-    if (!this.state.isImageCopied) {
-      this.setState({ isImageCopied: true });
-      setTimeout(() => this.setState({ isImageCopied: false }), TIMEOUT_DURATION);
+  const handleImageCopy = () => {
+    if (!isImageCopied) {
+      setImageCopied(true);
+      setTimeout(() => setImageCopied(false), TIMEOUT_DURATION);
     }
   };
 
-  render() {
-    return (
-      <main class="wrapper">
-        <section class="container">
-          <div class="row">
-            <div className="column column-80 column-offset-10">
-              <h1># React Copy Button</h1>
-              <input type="text" name="text" placeholder="Type text" onChange={this._handleChange} />
-              <CopyButton className="button button-outline" text={this.state.text} onClick={this._handleTextCopy}>
-                {this.state.isTextCopied ? 'Text Copied!' : 'Copy Text'}
-              </CopyButton>
-              <hr />
-              <input
-                type="text"
-                name="image"
-                value={this.state.image}
-                placeholder="Paste image url here"
-                onChange={this._handleChange}
+  return (
+    <main className="wrapper">
+      <section className="container">
+        <div className="row">
+          <div className="column column-80 column-offset-10">
+            <h1># React Copy Button</h1>
+            <input
+              type="text"
+              name="text"
+              placeholder="Type text"
+              onChange={handleChange}
+            />
+            <CopyButton
+              className="button button-outline"
+              text={copyValue.text}
+              onClick={handleTextCopy}
+            >
+              {isTextCopied ? "Text Copied!" : "Copy Text"}
+            </CopyButton>
+            <hr />
+            <input
+              type="text"
+              name="image"
+              value={copyValue.image}
+              placeholder="Paste image url here"
+              onChange={handleChange}
+            />
+            <div style={{ textAlign: "center", padding: 40 }} ref={imgRef}>
+              <img
+                height={400}
+                src={
+                  copyValue.image ||
+                  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2000px-React-icon.svg.png"
+                }
+                alt="React Copy Button"
               />
-              <div style={{ textAlign: 'center' }} ref={this.imgRef}>
-                <img
-                  src={
-                    this.state.image ||
-                    'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2000px-React-icon.svg.png'
-                  }
-                  alt="React Copy Button"
-                />
-              </div>
-              <CopyButton className="button button-outline" imgRef={this.imgRef} onClick={this._handleImageCopy}>
-                {this.state.isImageCopied ? 'Image Copied!' : 'Copy Text'}
-              </CopyButton>
             </div>
+            <CopyButton
+              className="button button-outline"
+              imgRef={imgRef}
+              onClick={handleImageCopy}
+            >
+              {isImageCopied ? "Image Copied!" : "Copy Image"}
+            </CopyButton>
           </div>
-        </section>
-      </main>
-    );
-  }
+        </div>
+      </section>
+    </main>
+  );
 }
+
+export default App;

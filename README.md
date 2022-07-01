@@ -15,19 +15,35 @@ yarn add react-copy-button
 ## Usage
 
 ```jsx
-import * as React from 'react';
+// Functional Component with useRef hook.
+import React from "react";
+import { useRef } from "react";
+import { useState } from "react";
 
-import CopyButton from 'react-copy-button';
+function App() {
+  const imgRef = useRef();
+
+  return (
+    <React.Fragment>
+      <div ref={imgRef}>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2000px-React-icon.svg.png" />
+      </div>
+      <CopyButton imgRef={imgRef}>Copy Image</CopyButton>
+      <CopyButton text="Text to copy">Copy Text</CopyButton>
+    </React.Fragment>
+  );
+}
+
+// Class Component
+import * as React from "react";
+
+import CopyButton from "react-copy-button";
 
 class Example extends React.Component {
   constructor(props) {
     super(props);
 
     this.imgRef = React.createRef();
-    this.state = {
-      text: '',
-      image: ''
-    };
   }
 
   render() {
