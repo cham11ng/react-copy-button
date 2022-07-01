@@ -16,7 +16,7 @@
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w",
-    "prepare": "yarn run build && husky install",
+    "prepare": "husky install",
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build",
     "lint": "eslint .",
