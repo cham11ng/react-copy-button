@@ -21,15 +21,19 @@ import { useRef } from 'react';
 import { useState } from 'react';
 
 function App() {
-  const imgRef = useRef();
+  const imageRef = useRef();
+  const url =
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2000px-React-icon.svg.png';
 
   return (
     <React.Fragment>
-      <div ref={imgRef}>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2000px-React-icon.svg.png" />
+      <div ref={imageRef}>
+        <img src={url} />
       </div>
-      <CopyButton imgRef={imgRef}>Copy Image</CopyButton>
+      <CopyButton imageRef={imageRef}>Copy Image</CopyButton>
+
       <CopyButton text="Text to copy">Copy Text</CopyButton>
+      <CopyButton imageURL={url}>Copy Image (New)</CopyButton>
     </React.Fragment>
   );
 }
@@ -39,21 +43,26 @@ import * as React from 'react';
 
 import CopyButton from 'react-copy-button';
 
+const url =
+  'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2000px-React-icon.svg.png';
+
 class Example extends React.Component {
   constructor(props) {
     super(props);
 
-    this.imgRef = React.createRef();
+    this.imageRef = React.createRef();
   }
 
   render() {
     return (
       <React.Fragment>
-        <div ref={this.imgRef}>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2000px-React-icon.svg.png" />
+        <div ref={this.imageRef}>
+          <img src={url} />
         </div>
-        <CopyButton imgRef={this.imgRef}>Copy Image</CopyButton>
+        <CopyButton imageRef={this.imageRef}>Copy Image</CopyButton>
+
         <CopyButton text="Text to copy">Copy Text</CopyButton>
+        <CopyButton imageURL={url}>Copy Image (New)</CopyButton>
       </React.Fragment>
     );
   }
@@ -63,7 +72,15 @@ class Example extends React.Component {
 ## Development
 
 ```bash
-pnpm install
+$ pnpm install
+
+$ pnpm start
+
+$ cd example
+
+$ yarn install
+
+$ yarn start
 ```
 
 ## Browser compatibility

@@ -1,3 +1,99 @@
+const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+/**
+ * Copy text to clipboard.
+ *
+ * @param  {string} text
+ * @returns Promise
+ */
+export async function copyTextToClipboard(text: string): Promise<void> {
+  if ('clipboard' in navigator) {
+    await navigator.clipboard.writeText(text);
+  } else {
+    copyTextLegacy(text);
+  }
+}
+
+/**
+ * Convert image to return Blob object before writing it to the clipboard.
+ *
+ * @param  {string} url
+ * @returns {Promise<Blob}
+ */
+async function getImageBlobFromUrl(url: string): Promise<Blob> {
+  const data = await fetch(url);
+  const blob = await data.blob();
+
+  return blob;
+}
+
+/**
+ * Only 'text/plain' and 'image/png' are implemented in both Chrome and Safari.
+ * This is workaround for SVGs, as they can be copied as 'text/plain'
+ * instead of 'image/svg+xml'.
+ *
+ * @param  {string} url
+ * @returns {Promise<Blob}
+ */
+async function getTextBlobFromUrl(url: string): Promise<Blob> {
+  const response = await fetch(url);
+  const source = await response.text();
+
+  return new Blob([source], { type: 'text/plain' });
+}
+
+/**
+ * Copy image to clipboard.
+ *
+ * Chromium browsers require a Blob type when you create a
+ * new ClipboardItem e.g. {'<IMAGE MIME TYPE>': Blob},
+ * Safari on the other hand requires an unresolved Promise
+ * that returns a Blob object e.g. {'<IMAGE MIME TYPE>': Promise<Blob>}.
+ *
+ * @param  {string} url
+ * @param  {HTMLDivElement} element
+ * @returns Promise
+ */
+export async function copyImageToClipboard(
+  content: string | HTMLDivElement
+): Promise<void> {
+  if (content instanceof HTMLDivElement) {
+    copyImageLegacy(content);
+
+    return;
+  }
+
+  if ('clipboard' in navigator) {
+    const { type: mimeType } = await getImageBlobFromUrl(content);
+    const blobPromise =
+      mimeType === 'image/svg'
+        ? getTextBlobFromUrl(content)
+        : getImageBlobFromUrl(content);
+
+    let clipboardObject: { [key: string]: any };
+
+    if (!isSafari) {
+      clipboardObject = { [mimeType]: blobPromise };
+    } else {
+      const blob = await blobPromise;
+
+      clipboardObject = { [blob.type]: blob };
+    }
+
+    try {
+      return await navigator.clipboard.write([
+        new window.ClipboardItem(clipboardObject)
+      ]);
+    } catch (err) {
+      console.warn(`Image not supported.`, err);
+
+      return;
+    }
+  }
+
+  console.warn("'navigator.clipboard' is not supported. Pass element instead.");
+}
+
 /**
  * Copies given text to clipboard. It creates textarea element and sets given text to value, appends the
  * element to HTML document outside the screen to make it invisible and copies the selected text from
@@ -7,7 +103,7 @@
  * @param {string} text
  * @returns {any}
  */
-export function copyTextToClipboard(text: string): any {
+export function copyTextLegacy(text: string): any {
   // IE specific code path to prevent textarea being shown while dialog is visible.
   if ((window as any).clipboardData && (window as any).clipboardData.setData) {
     return (window as any).clipboardData.setData('Text', text);
@@ -22,7 +118,8 @@ export function copyTextToClipboard(text: string): any {
 
     element.textContent = text;
     element.style.left = '-9999px';
-    element.style.position = 'fixed'; // fixed Prevent scrolling to bottom of page in MS Edge.
+    // Fixed Prevent scrolling to bottom of page in MS Edge.
+    element.style.position = 'fixed';
     element.setAttribute('readonly', '');
 
     document.body.appendChild(element);
@@ -58,7 +155,7 @@ export function copyTextToClipboard(text: string): any {
  * @param {HTMLDivElement} element
  * @returns {boolean}
  */
-export function copyImageToClipboard(element: HTMLDivElement): boolean {
+export function copyImageLegacy(element: HTMLDivElement): boolean {
   const selection = window.getSelection();
   const range = document.createRange();
 
