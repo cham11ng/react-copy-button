@@ -13,7 +13,10 @@ export function copyTextToClipboard(text: string): any {
     return (window as any).clipboardData.setData('Text', text);
   }
 
-  if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+  if (
+    document.queryCommandSupported &&
+    document.queryCommandSupported('copy')
+  ) {
     const selectionArea = document.getSelection();
     const element = document.createElement('textarea');
 
@@ -36,7 +39,8 @@ export function copyTextToClipboard(text: string): any {
       document.body.removeChild(element);
 
       if (selectionArea) {
-        const selected = selectionArea.rangeCount > 0 ? selectionArea.getRangeAt(0) : false;
+        const selected =
+          selectionArea.rangeCount > 0 ? selectionArea.getRangeAt(0) : false;
 
         if (selected) {
           selectionArea.removeAllRanges();

@@ -20,7 +20,7 @@
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix . --ext .ts,.tsx",
+    "lint:fix": "eslint --fix .",
     "prettify": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}'"
   },
   "devDependencies": {

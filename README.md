@@ -16,9 +16,9 @@ yarn add react-copy-button
 
 ```jsx
 // Functional Component with useRef hook.
-import React from "react";
-import { useRef } from "react";
-import { useState } from "react";
+import React from 'react';
+import { useRef } from 'react';
+import { useState } from 'react';
 
 function App() {
   const imgRef = useRef();
@@ -35,9 +35,9 @@ function App() {
 }
 
 // Class Component
-import * as React from "react";
+import * as React from 'react';
 
-import CopyButton from "react-copy-button";
+import CopyButton from 'react-copy-button';
 
 class Example extends React.Component {
   constructor(props) {
@@ -58,6 +58,12 @@ class Example extends React.Component {
     );
   }
 }
+```
+
+## Development
+
+```bash
+pnpm install
 ```
 
 ## Browser compatibility
