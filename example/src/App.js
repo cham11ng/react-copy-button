@@ -57,7 +57,7 @@ function App() {
             <CopyButton
               className="button button-outline"
               text={copyState.text}
-              onClick={handleTextCopy}
+              onCopy={handleTextCopy}
             >
               {isTextCopied ? 'Text Copied!' : 'Copy Text'}
             </CopyButton>
@@ -75,14 +75,14 @@ function App() {
             <CopyButton
               className="button button-outline"
               imageRef={imageRef}
-              onClick={handleImageCopy}
+              onCopy={handleImageCopy}
             >
               {isImageCopied ? 'Image Copied!' : 'Copy Image'}
             </CopyButton>
             <CopyButton
               className="button button-outline"
               imageURL={copyState.image}
-              onClick={handleNewImageCopy}
+              onCopy={handleNewImageCopy}
             >
               {isImageNewCopied ? 'Image Copied! (New)' : 'Copy Image (New)'}
             </CopyButton>
