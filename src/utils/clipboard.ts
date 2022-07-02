@@ -7,7 +7,7 @@ const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
  * @returns Promise
  */
 export async function copyTextToClipboard(text: string): Promise<void> {
-  if ('clipboard' in navigator) {
+  if (navigator.clipboard) {
     await navigator.clipboard.writeText(text);
   } else {
     copyTextLegacy(text);
@@ -52,7 +52,7 @@ async function getTextBlobFromUrl(url: string): Promise<Blob> {
  *
  * @param  {string} url
  * @param  {HTMLDivElement} element
- * @returns Promise
+ * @returns {Promise<void>}
  */
 export async function copyImageToClipboard(
   content: string | HTMLDivElement
@@ -63,7 +63,7 @@ export async function copyImageToClipboard(
     return;
   }
 
-  if ('clipboard' in navigator) {
+  if (navigator.clipboard) {
     const { type: mimeType } = await getImageBlobFromUrl(content);
     const blobPromise =
       mimeType === 'image/svg'
@@ -72,26 +72,26 @@ export async function copyImageToClipboard(
 
     let clipboardObject: { [key: string]: any };
 
-    if (!isSafari) {
+    if (isSafari) {
       clipboardObject = { [mimeType]: blobPromise };
     } else {
-      const blob = await blobPromise;
-
-      clipboardObject = { [blob.type]: blob };
+      clipboardObject = { [mimeType]: await blobPromise };
     }
 
     try {
-      return await navigator.clipboard.write([
+      await navigator.clipboard.write([
         new window.ClipboardItem(clipboardObject)
       ]);
     } catch (err) {
       console.warn(`Image not supported.`, err);
-
-      return;
     }
+
+    return;
   }
 
-  console.warn("'navigator.clipboard' is not supported. Pass element instead.");
+  console.warn(
+    "'navigator.clipboard' is not supported in this browser. Pass element instead."
+  );
 }
 
 /**

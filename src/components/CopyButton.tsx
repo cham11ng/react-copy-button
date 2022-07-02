@@ -4,7 +4,7 @@ import { copyImageToClipboard, copyTextToClipboard } from '../utils/clipboard';
 type CopyProps = {
   children: React.ReactNode;
   className?: string;
-  onClick?: () => void;
+  onCopy?: () => void;
   text?: string;
   imageURL?: string;
   imageRef?: React.RefObject<HTMLDivElement>;
@@ -28,7 +28,7 @@ const CopyButton = (props: CopyProps) => {
       copyImageToClipboard(content);
     }
 
-    props.onClick && props.onClick();
+    props.onCopy && props.onCopy();
   };
 
   return (
