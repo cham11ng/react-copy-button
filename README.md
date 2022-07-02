@@ -83,6 +83,14 @@ $ yarn install
 $ yarn start
 ```
 
+## Release and Publish
+
+```
+$ gh release create 0.2.1 --generate-notes --prerelease
+
+$ pnpm publish
+```
+
 ## Browser compatibility
 
 - execCommand [here](https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand#Browser_compatibility).
