@@ -64,7 +64,10 @@ export async function copyImageToClipboard(
   }
 
   if (navigator.clipboard) {
-    const { type: mimeType } = await getImageBlobFromUrl(content);
+    // TODO: Fix hardcoded png.
+    const { type: mimeType } = isSafari
+      ? { type: 'image/png' }
+      : await getImageBlobFromUrl(content);
     const blobPromise =
       mimeType === 'image/svg'
         ? getTextBlobFromUrl(content)
@@ -78,13 +81,9 @@ export async function copyImageToClipboard(
       clipboardObject = { [mimeType]: await blobPromise };
     }
 
-    try {
-      await navigator.clipboard.write([
-        new window.ClipboardItem(clipboardObject)
-      ]);
-    } catch (err) {
-      console.warn(`Image not supported.`, err);
-    }
+    navigator.clipboard
+      .write([new window.ClipboardItem(clipboardObject)])
+      .catch((err) => console.warn(`Image not supported.`, err));
 
     return;
   }
