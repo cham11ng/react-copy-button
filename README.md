@@ -10,6 +10,8 @@
 
 ```bash
 yarn add react-copy-button
+or
+bun install react-copy-button
 ```
 
 ## Usage
@@ -72,15 +74,24 @@ class Example extends React.Component {
 ## Development
 
 ```bash
-$ pnpm install
+# Package
+$ bun install
 
-$ pnpm start
+$ bun link
+
+$ bun start
+
+$ bun run build
+
+# Example
 
 $ cd example
 
-$ yarn install
+$ bun install
 
-$ yarn start
+$ bun start
+
+$ bun run build
 ```
 
 ## Release and Publish
@@ -88,7 +99,7 @@ $ yarn start
 ```
 $ gh release create 0.2.1 --generate-notes --prerelease
 
-$ pnpm publish
+$ bun publish
 ```
 
 ## Browser compatibility
