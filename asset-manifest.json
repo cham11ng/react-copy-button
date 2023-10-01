@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/react-copy-button/static/css/main.78ad6254.css",
-    "main.js": "/react-copy-button/static/js/main.0413a907.js",
+    "main.css": "/react-copy-button/static/css/main.4d4117cd.css",
+    "main.js": "/react-copy-button/static/js/main.322367fa.js",
     "index.html": "/react-copy-button/index.html",
-    "main.78ad6254.css.map": "/react-copy-button/static/css/main.78ad6254.css.map",
-    "main.0413a907.js.map": "/react-copy-button/static/js/main.0413a907.js.map"
+    "main.4d4117cd.css.map": "/react-copy-button/static/css/main.4d4117cd.css.map",
+    "main.322367fa.js.map": "/react-copy-button/static/js/main.322367fa.js.map"
   },
   "entrypoints": [
-    "static/css/main.78ad6254.css",
-    "static/js/main.0413a907.js"
+    "static/css/main.4d4117cd.css",
+    "static/js/main.322367fa.js"
   ]
 }
